@@ -1,4 +1,3 @@
-const apiKey = 'd4564b3b';
 const searchForm = document.getElementById('searchForm');
 const searchInput = document.getElementById('searchInput');
 const filmsContainer = document.querySelector('.films-container');
@@ -68,20 +67,23 @@ async function displayFilmDetails(imdbID) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  let observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.4
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible', 'fade-in');
+      observer.unobserve(entry.target);
+    } else {
+      // Code à exécuter lorsque l'élément n'est pas en intersection (n'est pas visible)
+      // Par exemple, vous pouvez ajouter une classe pour marquer qu'il ne doit pas être chargé
+      entry.target.classList.add('not-visible');
+    }
   });
-
-  const fadeIns = document.querySelectorAll('.fade-in');
-  fadeIns.forEach(fadeIn => {
-    observer.observe(fadeIn);
-  });
+}, {
+  threshold: 1.0
 });
+
+const fadeIns = document.querySelectorAll('.fade-in');
+fadeIns.forEach(fadeIn => {
+  observer.observe(fadeIn);
+});
+

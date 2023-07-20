@@ -34,6 +34,14 @@
 }
 
 .fade-in {
-  opacity: 0;
+  opacity: 40;
   transition: opacity 1s ease;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.not-visible {
+  display: none; /* Cacher l'élément s'il n'est pas visible */
 }
